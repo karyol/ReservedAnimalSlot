@@ -5,4 +5,4 @@
 - LoudParrots
 
 ## Known issues:
-- sometimes shows grab invalidated errors when picking up an animal
+- Sometimes shows grab invalidated errors when picking up an animal

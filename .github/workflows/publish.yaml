@@ -4,32 +4,12 @@ name: Publish Mod
 on: 
   release:
     types: [published]
-  workflow_dispatch:
-    inputs:
-      version:
-        description: Version
-        required: true
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: GreenTF/upload-thunderstore-package@v4.3
-        if: github.event.inputs.version != ''
-        with:
-          namespace: BaronDrakula
-          description: Reserved slot for Lethal Company animals
-          token: ${{ secrets.THUNDERSTORE_API_KEY }}
-          name: ReservedAnimalSlot
-          version: ${{ github.event.inputs.version }}
-          community: lethal-company
-          repo: github.com/karyol/ReservedAnimalSlot
-          categories: |
-            Mods
-            BepInEx
-            ClientSide
-            Items
       - uses: GreenTF/upload-thunderstore-package@v4.3
         if: github.event.inputs.version == ''
         with:
