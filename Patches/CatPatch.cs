@@ -1,13 +1,9 @@
 ﻿using GameNetcodeStuff;
 using HarmonyLib;
 using NeedyCats;
-using ReservedItemSlotCore;
 using ReservedItemSlotCore.Data;
-using ReservedItemSlotCore.Patches;
-using ReservedAnimalSlot.Compatibility;
-using TooManyEmotes;
-using Unity.Netcode;
-using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ReservedAnimalSlot.Patches
 {
@@ -17,19 +13,15 @@ namespace ReservedAnimalSlot.Patches
         public static PlayerControllerB localPlayerController { get { return StartOfRound.Instance?.localPlayerController; } }
         public static ReservedPlayerData localPlayerData { get { return ReservedPlayerData.localPlayerData; } }
 
-        [HarmonyPatch(typeof(ReservedHotbarManager), nameof(ReservedHotbarManager.CanSwapHotbars))]
+        [HarmonyPatch(typeof(NeedyCatsBase), "AddNeedyCatsToAllLevels")]
         [HarmonyPostfix]
-        public static void CanSwapHotbars(ref bool __result)
+        public static void ChangeNeedyCatTwoHandedState(NeedyCatsBase __instance)
         {
-            if (!HUDPatcher.hasReservedItemSlotsAndEnabled) return;
-            if (!localPlayerData.currentItemSlotIsReserved) return;
-
-            if (!__result)
+            Item item = NeedyCatsBase.Assets.MainAssetBundle.LoadAsset<Item>("CatItem");
+            foreach (SelectableLevel selectableLevel in StartOfRound.Instance.levels)
             {
-                if (localPlayerData.currentlySelectedItem as NeedyCatProp == null) return;
-                if (TooManyEmotes_Patcher.Enabled && TooManyEmotes_Patcher.IsLocalPlayerPerformingCustomEmote() && !TooManyEmotes_Patcher.CanMoveWhileEmoting()) return;
-                if (!(ReservedPlayerData.localPlayerData.grabbingReservedItemData != null || localPlayerController.isGrabbingObjectAnimation || localPlayerController.quickMenuManager.isMenuOpen || localPlayerController.inSpecialInteractAnimation || localPlayerData.throwingObject || localPlayerController.isTypingChat || localPlayerController.activatingItem || localPlayerController.jetpackControls || localPlayerController.disablingJetpackControls || localPlayerController.inTerminalMenu || localPlayerController.isPlayerDead || localPlayerData.timeSinceSwitchingSlots < 0.3f)) __result = false;
-                __result = true;
+                IEnumerable<SpawnableItemWithRarity> spawnableScrap = selectableLevel.spawnableScrap;
+                spawnableScrap.Where(scrap => scrap.spawnableItem == item).First().spawnableItem.twoHanded = false;
             }
         }
     }

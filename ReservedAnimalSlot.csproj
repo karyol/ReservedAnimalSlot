@@ -2,7 +2,7 @@
 
     <!-- BepInEx Properties -->
     <PropertyGroup>
-        <AssemblyName>BaronDrakula.ReservedAnimalSlot</AssemblyName>
+        <AssemblyName>ReservedAnimalSlot</AssemblyName>
         <Product>ReservedAnimalSlot</Product>
         <!-- Change to whatever version you're currently on. -->
         <Version>1.0.0</Version>

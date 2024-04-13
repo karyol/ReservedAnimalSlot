@@ -3,5 +3,4 @@
 Currently supports only NeedyCats mod.
 
 Known issues:
-- cannot swap to other reserved slots when picked up a cat
-- grab invalidated errors when picking up a cat
+- sometimes show grab invalidated errors when picking up a cat but works anyway
