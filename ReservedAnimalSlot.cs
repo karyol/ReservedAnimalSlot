@@ -10,7 +10,7 @@ namespace ReservedAnimalSlot;
 
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
 [BepInDependency("FlipMods.ReservedItemSlotCore", BepInDependency.DependencyFlags.HardDependency)]
-[BepInDependency("Jordo.NeedyCats", BepInDependency.DependencyFlags.HardDependency)]
+[BepInDependency("Jordo.NeedyCats", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("com.rune580.LethalCompanyInputUtils", BepInDependency.DependencyFlags.SoftDependency)]
 public class ReservedAnimalSlot : BaseUnityPlugin
 {
