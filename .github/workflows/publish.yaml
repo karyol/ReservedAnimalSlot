@@ -23,5 +23,5 @@ jobs:
           categories: | # <-- notice this pipe character
             Mods
             BepInEx
-            ClientSide
+            Client-side
             Items
