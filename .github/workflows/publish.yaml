@@ -13,8 +13,6 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    strategy:
-      matrix: {}
     steps:
       - uses: actions/checkout@v3
       - uses: GreenTF/upload-thunderstore-package@v4.3
@@ -24,7 +22,7 @@ jobs:
           description: Reserved slot for Lethal Company animals
           token: ${{ secrets.THUNDERSTORE_API_KEY }}
           name: ReservedAnimalSlot
-          version: ${{ github.event.inputs.git-ref }}
+          version: ${{ github.event.inputs.version }}
           community: lethal-company
           repo: github.com/karyol/ReservedAnimalSlot
           categories: |
@@ -47,4 +45,3 @@ jobs:
             BepInEx
             ClientSide
             Items
-            ClientSide
