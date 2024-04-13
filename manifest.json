@@ -1,6 +1,6 @@
 {
     "name": "ReservedAnimalSlot",
-    "version_number": "1.1.1",
+    "version_number": "1.1.2",
     "website_url": "https://github.com/karyol/ReservedAnimalSlot",
     "description": "Reserved slot for Lethal Company animals",
     "dependencies": [
