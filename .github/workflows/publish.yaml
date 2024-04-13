@@ -8,6 +8,8 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    strategy:
+      matrix: {}
     steps:
       - uses: actions/checkout@v3
       - uses: GreenTF/upload-thunderstore-package@v4.3
