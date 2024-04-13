@@ -1,7 +1,5 @@
-﻿using GameNetcodeStuff;
-using HarmonyLib;
+﻿using HarmonyLib;
 using NeedyCats;
-using ReservedItemSlotCore.Data;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,8 +8,6 @@ namespace ReservedAnimalSlot.Patches
     [HarmonyPatch]
     internal class CatPatch
     {
-        public static PlayerControllerB localPlayerController { get { return StartOfRound.Instance?.localPlayerController; } }
-        public static ReservedPlayerData localPlayerData { get { return ReservedPlayerData.localPlayerData; } }
 
         [HarmonyPatch(typeof(NeedyCatsBase), "AddNeedyCatsToAllLevels")]
         [HarmonyPostfix]

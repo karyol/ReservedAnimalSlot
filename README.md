@@ -1,6 +1,8 @@
 # Reserved slot for Lethal Company mods that adds animals
 
-Currently supports only NeedyCats mod.
+## Currently supported mods:
+- NeedyCats
+- LoudParrots
 
-Known issues:
-- sometimes show grab invalidated errors when picking up a cat but works anyway
+## Known issues:
+- sometimes shows grab invalidated errors when picking up an animal

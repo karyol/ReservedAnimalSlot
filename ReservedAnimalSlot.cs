@@ -11,6 +11,7 @@ namespace ReservedAnimalSlot;
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
 [BepInDependency("FlipMods.ReservedItemSlotCore", BepInDependency.DependencyFlags.HardDependency)]
 [BepInDependency("Jordo.NeedyCats", BepInDependency.DependencyFlags.SoftDependency)]
+[BepInDependency("TridentsCodes.LoudParrots", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("com.rune580.LethalCompanyInputUtils", BepInDependency.DependencyFlags.SoftDependency)]
 public class ReservedAnimalSlot : BaseUnityPlugin
 {
@@ -18,8 +19,16 @@ public class ReservedAnimalSlot : BaseUnityPlugin
     internal new static ManualLogSource Logger { get; private set; } = null!;
     internal static Harmony? Harmony { get; set; }
 
-    public static ReservedItemSlotData catSlotData;
+    public static ReservedItemSlotData animalSlotData;
     public static ReservedItemData catData;
+    public static ReservedItemData parrotData;
+    public static ReservedItemData goldFinchData;
+    public static ReservedItemData crowData;
+    public static ReservedItemData robinData;
+    public static ReservedItemData cardinalData;
+    public static ReservedItemData littleBirdData;
+    public static ReservedItemData blueJayData;
+    public static ReservedItemData sparrowData;
 
     public static List<ReservedItemData> additionalItemData = new List<ReservedItemData>();
 
@@ -39,8 +48,16 @@ public class ReservedAnimalSlot : BaseUnityPlugin
 
     void CreateReservedItemSlots()
     {
-        catSlotData = ReservedItemSlotData.CreateReservedItemSlotData("cat", ConfigSettings.overrideItemSlotPriority.Value, ConfigSettings.overridePurchasePrice.Value);
-        catData = catSlotData.AddItemToReservedItemSlot(new ReservedItemData("Cat", PlayerBone.RightShoulder, new Vector3(-.2f, .25f, 0f), new Vector3(0, 90, 90)));
+        animalSlotData = ReservedItemSlotData.CreateReservedItemSlotData("cat", ConfigSettings.overrideItemSlotPriority.Value, ConfigSettings.overridePurchasePrice.Value);
+        catData = animalSlotData.AddItemToReservedItemSlot(new ReservedItemData("Cat", PlayerBone.RightShoulder, new Vector3(-.2f, .25f, 0f), new Vector3(0, 90, 90)));
+        parrotData = animalSlotData.AddItemToReservedItemSlot(new ReservedItemData("Parrot", PlayerBone.RightShoulder, new Vector3(0f, .2f, 0f), new Vector3(90, 0, 0)));
+        crowData = animalSlotData.AddItemToReservedItemSlot(new ReservedItemData("Crow", PlayerBone.RightShoulder, new Vector3(0f, .2f, 0f), new Vector3(0, 90, 90)));
+        robinData = animalSlotData.AddItemToReservedItemSlot(new ReservedItemData("Robin", PlayerBone.RightShoulder, new Vector3(0f, .2f, 0f), new Vector3(0, 90, 90)));
+        sparrowData = animalSlotData.AddItemToReservedItemSlot(new ReservedItemData("Sparrow", PlayerBone.RightShoulder, new Vector3(0f, .2f, 0f), new Vector3(0, 90, 90)));
+        goldFinchData = animalSlotData.AddItemToReservedItemSlot(new ReservedItemData("Gold Finch", PlayerBone.RightShoulder, new Vector3(0f, .2f, 0f), new Vector3(0, 90, 90)));
+        cardinalData = animalSlotData.AddItemToReservedItemSlot(new ReservedItemData("cardinal", PlayerBone.RightShoulder, new Vector3(0f, .2f, 0f), new Vector3(0, 90, 90)));
+        littleBirdData = animalSlotData.AddItemToReservedItemSlot(new ReservedItemData("Little bird", PlayerBone.RightShoulder, new Vector3(0f, .2f, 0f), new Vector3(0, 90, 90)));
+        blueJayData = animalSlotData.AddItemToReservedItemSlot(new ReservedItemData("Blue bird", PlayerBone.RightShoulder, new Vector3(0f, .2f, 0f), new Vector3(0, 90, 90)));
     }
 
     void CreateAdditionalReservedItemSlots()
@@ -48,12 +65,12 @@ public class ReservedAnimalSlot : BaseUnityPlugin
         string[] additionalItemNames = ConfigSettings.ParseAdditionalItems();
         foreach (string itemName in additionalItemNames)
         {
-            if (!catSlotData.ContainsItem(itemName))
+            if (!animalSlotData.ContainsItem(itemName))
             {
                 LogWarning("Adding additional item to reserved item slot. Item: " + itemName);
                 var itemData = new ReservedItemData(itemName);
                 additionalItemData.Add(itemData);
-                catSlotData.AddItemToReservedItemSlot(itemData);
+                animalSlotData.AddItemToReservedItemSlot(itemData);
             }
         }
     }
