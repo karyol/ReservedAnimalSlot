@@ -6,26 +6,41 @@ on:
     types: [published]
   workflow_dispatch:
     inputs:
-      git-ref:
-        description: Git Ref (Optional)    
-        required: false
+      version:
+        description: Version
+        required: true
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      # Use checkout to publish the files in your repo
       - uses: actions/checkout@v3
       - uses: GreenTF/upload-thunderstore-package@v4.3
+        if: github.event.inputs.version != ''
         with:
-          namespace: BaronDrakula # the thunderstore 'team' to publish under
+          namespace: BaronDrakula
+          description: Reserved slot for Lethal Company animals
+          token: ${{ secrets.THUNDERSTORE_API_KEY }}
+          name: ReservedAnimalSlot
+          version: ${{ github.event.inputs.git-ref }}
+          community: lethal-company
+          repo: github.com/karyol/ReservedAnimalSlot
+          categories: |
+            Mods
+            BepInEx
+            ClientSide
+            Items
+      - uses: GreenTF/upload-thunderstore-package@v4.3
+        if: github.event.inputs.version == ''
+        with:
+          namespace: BaronDrakula
           description: Reserved slot for Lethal Company animals
           token: ${{ secrets.THUNDERSTORE_API_KEY }}
           name: ReservedAnimalSlot
           version: ${{ github.ref_name }} # Use the tag as the package version
           community: lethal-company
           repo: github.com/karyol/ReservedAnimalSlot
-          categories: | # <-- notice this pipe character
+          categories: |
             Mods
             BepInEx
             ClientSide
