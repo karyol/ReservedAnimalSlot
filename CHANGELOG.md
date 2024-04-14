@@ -1,3 +1,7 @@
+## 1.1.3
+
+- Fixed errors made by auto publish action
+
 ## 1.1.1
 
 - Fixed icon and changelog
