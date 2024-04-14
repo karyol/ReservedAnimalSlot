@@ -8,7 +8,6 @@ namespace ReservedAnimalSlot.Patches
     [HarmonyPatch]
     internal class CatPatch
     {
-
         [HarmonyPatch(typeof(NeedyCatsBase), "AddNeedyCatsToAllLevels")]
         [HarmonyPostfix]
         public static void ChangeNeedyCatTwoHandedState(NeedyCatsBase __instance)
